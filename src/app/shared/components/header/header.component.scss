@@ -1,0 +1,21 @@
+.header {
+  padding: 16px;
+  background-color: aliceblue;
+  display: flex;
+  justify-content: space-between;
+
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .controls {
+    display: flex;
+    gap: 16px;
+
+    .control {
+      font-weight: 700;
+      cursor: pointer;
+    }
+  }
+}
