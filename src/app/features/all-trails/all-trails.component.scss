@@ -1,17 +1,27 @@
-.controls {
-  display: flex;
-  justify-content: space-between;
-}
-
 .layout {
   display: flex;
 
   &__content-left {
     padding: 8px;
     width: 300px;
+    height: calc(100vh - 80px);
+    overflow: scroll;
+
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .trail-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
   }
   &__content-right {
     flex: 1;
+    height: calc(100vh - 64px);
+    overflow: hidden;
   }
 }
 

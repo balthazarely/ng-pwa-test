@@ -15,11 +15,21 @@ import { ArcGisMapComponent } from '../../shared/components/arc-gis-map/arc-gis-
 import { ArcGisTrailService } from '../../core/services/arc-gis-trail.service';
 import { Trail } from '../../core/types/trail.model';
 import { CounterComponent } from '../../shared/components/counter/counter.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-all-trails',
   standalone: true,
-  imports: [CommonModule, ArcGisMapComponent, CounterComponent],
+  imports: [
+    CommonModule,
+    ArcGisMapComponent,
+    CounterComponent,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './all-trails.component.html',
   styleUrl: './all-trails.component.scss',
 })

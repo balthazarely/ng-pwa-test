@@ -1,0 +1,12 @@
+<button (click)="setDifficultyFilter('Beginner')">Beginner</button>
+<button (click)="setDifficultyFilter('Intermediate')">Intermediate</button>
+<button (click)="setDifficultyFilter('Advanced')">Advanced</button>
+<button (click)="setDifficultyFilter('Expert')">Expert</button>
+
+<button (click)="setDifficultyFilter(null)">All</button>
+
+<!-- <button (click)="adjustFillOnLayer('Bayton')">Baytown Hightlight</button> -->
+<button (click)="flyTo(44.0582, -121.3153)">Fly To Bend</button>
+<button (click)="flyTo(29.7308, -95)">Fly To Baytown</button>
+
+<div class="map" id="map" class="match-parent"></div>

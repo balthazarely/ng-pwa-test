@@ -1,25 +1,28 @@
-<div class="controls">
-  <div>
-    <button (click)="getTrails()">get trails</button>
-    <button (click)="clearTrails()">clear trails</button>
-    <button style="margin-left: 24px" (click)="getSingleTrail('281506')">
-      Tiddlywinks
-    </button>
-    <button (click)="getSingleTrail('279437')">Upper Whoops</button>
-    <button (click)="getSingleTrail('274279')">Ticket To Ride</button>
-  </div>
-</div>
-
 <div class="layout">
   <div class="layout__content-left">
-    <div class="trail-single" *ngIf="trailRaw">
-      <div>
-        {{ trailRaw.name }}
-      </div>
-      <div>{{ trailRaw.difficulty }}</div>
+    <div class="buttons">
+      <button
+        (click)="getTrails()"
+        mat-icon-button
+        aria-label="Example icon button with a vertical three dot icon"
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
+      <button
+        (click)="clearTrails()"
+        mat-icon-button
+        aria-label="Example icon button with a vertical three dot icon"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
+
     <div *ngIf="isLoading">Loading</div>
-    <div *ngFor="let trail of trailsRaw">{{ trail.name }} - {{ trail.id }}</div>
+    <div class="trail-cards">
+      <div *ngFor="let trail of trailsRaw">
+        {{ trail.name }}
+      </div>
+    </div>
   </div>
   <div class="layout__content-right">
     <div class="layout__content-right__inner-wrapper">

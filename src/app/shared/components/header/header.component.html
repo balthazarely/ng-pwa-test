@@ -1,7 +1,22 @@
-<div class="header">
-  <div class="title">PWA Test</div>
-  <div class="controls">
-    <a routerLink="/" class="control">Home</a>
-    <a routerLink="/offline-route" class="control">Offline</a>
-  </div>
-</div>
+<mat-toolbar>
+  <button
+    (click)="toggleDrawer()"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>PWA Test</span>
+  <span class="example-spacer"></span>
+  <button
+    mat-icon-button
+    class="example-icon favorite-icon"
+    aria-label="Example icon-button with heart icon"
+  >
+    <mat-icon [class.online]="isAppOnline" *ngIf="isAppOnline">wifi</mat-icon>
+    <mat-icon [class.offline]="!isAppOnline" *ngIf="!isAppOnline"
+      >wifi_off</mat-icon
+    >
+  </button>
+</mat-toolbar>

@@ -1,2 +1,28 @@
-<app-header></app-header>
-<router-outlet />
+<mat-drawer-container class="example-container">
+  <mat-drawer #drawer class="example-sidenav" mode="over">
+    <div class="links">
+      <a matRipple routerLink="/" class="link">Home</a>
+      <a matRipple routerLink="/mapbox" class="link">Mapbox</a>
+      <a matRipple routerLink="/mapbox-donut-clusters" class="link"
+        >Mapbox Donut Clusters</a
+      >
+
+      <a matRipple routerLink="/offline-route" class="link">Single Trail</a>
+      <button
+        (click)="registerForPush()"
+        mat-icon-button
+        class="example-icon"
+        aria-label="Example icon-button with menu icon"
+      >
+        <mat-icon>notifications </mat-icon>
+      </button>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content
+    ><app-header
+      [toggleDrawer]="toggleDrawer"
+      [isAppOnline]="isAppOnline"
+    ></app-header>
+    <router-outlet
+  /></mat-drawer-content>
+</mat-drawer-container>

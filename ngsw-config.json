@@ -27,10 +27,11 @@
       }
     }
   ],
+  "navigationRequestStrategy": "freshness",
   "dataGroups": [
     {
       "name": "trails-api",
-      "urls": ["https://trailapi-trailapi.p.rapidapi.com/trails/**"],
+      "urls": ["https://trailapi-trailapi.p.rapidapi.com/trails/explore*"],
       "cacheConfig": {
         "strategy": "freshness",
         "maxAge": "1h",

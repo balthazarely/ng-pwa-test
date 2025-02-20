@@ -1,1 +1,12 @@
-<p>offline works!</p>
+<div class="trail-single" *ngIf="trail">
+  <h2>
+    {{ trail.name }}
+  </h2>
+  <div>{{ trail.city }}, {{ trail.country }}</div>
+  <div class="thumbnail">
+    <img [src]="trail.thumbnail" alt="trail image" />
+  </div>
+  <div class="difficulty">difficulty: {{ trail.difficulty }}</div>
+  <div>description: {{ trail.description }}</div>
+</div>
+<div class="loading" *ngIf="isLoading">loading</div>

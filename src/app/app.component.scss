@@ -1,0 +1,15 @@
+.example-sidenav {
+  padding: 20px;
+  width: 200px;
+
+  .links {
+    display: flex;
+    flex-direction: column;
+
+    .link {
+      text-decoration: none;
+      color: black;
+      padding: 14px 6px;
+    }
+  }
+}

@@ -1,1 +1,45 @@
-<div class="map" id="map" class="match-parent"></div>
+<div style="display: flex; justify-content: space-between; align-items: center">
+  <div>
+    <button (click)="setDifficultyFilter('Beginner')">Beginner</button>
+    <button (click)="setDifficultyFilter('Intermediate')">Intermediate</button>
+    <button (click)="setDifficultyFilter('Advanced')">Advanced</button>
+    <button (click)="setDifficultyFilter('Expert')">Expert</button>
+
+    <button (click)="setDifficultyFilter(null)">All</button>
+
+    <!-- <button (click)="adjustFillOnLayer('Bayton')">Baytown Hightlight</button> -->
+    <button (click)="flyTo(44.0582, -121.3153)">Fly To Bend</button>
+    <button (click)="flyTo(29.7308, -95)">Fly To Baytown</button>
+    <mat-spinner diameter="24" *ngIf="loadingLoop"></mat-spinner>
+  </div>
+  <!-- <div>
+    <mat-button-toggle-group
+      [(ngModel)]="mapStyle"
+      (ngModelChange)="updateMapStyle()"
+      aria-label="Font Style"
+    >
+      <mat-button-toggle value="standard">Standard</mat-button-toggle>
+      <mat-button-toggle value="dark-v11">Dark</mat-button-toggle>
+      <mat-button-toggle value="light-v11">Light</mat-button-toggle>
+      <mat-button-toggle value="standard-satellite">Satalite</mat-button-toggle>
+      <mat-button-toggle value="outdoors-v12">Outdoors</mat-button-toggle>
+      <mat-button-toggle value="streets-v12">Street</mat-button-toggle>
+      <mat-button-toggle value="navigation-day-v1"
+        >Navigation</mat-button-toggle
+      >
+      <mat-button-toggle value="navigation-night-v1"
+        >Navigation Night</mat-button-toggle
+      >
+      <mat-button-toggle value="standard-satellite"
+        >Satalite 2</mat-button-toggle
+      >
+    </mat-button-toggle-group>
+  </div> -->
+</div>
+
+<div class="map" id="map" class="match-parent">
+  <div id="legendPanel">
+    <h3>Legend</h3>
+    <ul id="legendList"></ul>
+  </div>
+</div>
