@@ -19,6 +19,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FormsModule } from '@angular/forms';
 import { computeBoundaryCentroid } from './utilities/mapbox.borders';
+import { decodePolyline } from './utilities/mapbox.lines';
 
 @Component({
   selector: 'app-mapbox-map',
@@ -97,6 +98,7 @@ export class MapboxMapComponent {
       this.addBoundaries('Hou-West', HoustonWestBoundaries);
 
       this.createLegend();
+      this.createLinePath();
     });
   }
 
@@ -276,18 +278,9 @@ export class MapboxMapComponent {
       this.mapClickListenerCluster(e, 'advanced')
     );
 
-    // this.map.on('click', 'filtered-trails', (e) => {
-    //   const coordinates = (e.features?.[0].geometry as GeoJSON.Point)
-    //     .coordinates;
-    //   const name = e.features?.[0].properties?.['name'];
-    //   const difficulty = e.features?.[0].properties?.['difficulty'];
-    //   new mapboxgl.Popup()
-    //     .setLngLat(coordinates as [number, number])
-    //     .setHTML(
-    //       `<div><h3>Name: ${name}</h3> <h5>difficulty: ${difficulty}</h5></div>`
-    //     )
-    //     .addTo(this.map!);
-    // });
+    this.map.on('click', 'filtered-trails', (e) => {
+      this.mapClickListener(e);
+    });
   }
 
   mapClickListener(e: mapboxgl.MapMouseEvent) {
@@ -419,7 +412,6 @@ export class MapboxMapComponent {
     this.difficultyFilter = difficulty;
 
     if (difficulty) {
-  
       // Hide the original cluster & unclustered layers
       this.map.setLayoutProperty(
         'easy-unclustered-point',
@@ -731,6 +723,40 @@ export class MapboxMapComponent {
         ${item.name}
       `;
       legendList.appendChild(listItem);
+    });
+  }
+
+  // How to add a simple line to the map
+  // API call ex: https://maps.googleapis.com/maps/api/directions/json?origin=44.063941615368016,-121.35892329473634&destination=44.050193697768584,-121.19625682727586&mode=driving&key=
+  routeGeoJSON: GeoJSON.Feature<GeoJSON.Geometry> = {
+    type: 'Feature',
+    properties: {},
+    geometry: {
+      type: 'LineString',
+      coordinates: decodePolyline(
+        'sf}kGj|ucVa@D_AVk@V}@j@e@`@Mc@Mi@Qo@Y{BGeAI}A?u@AiA@UeAg@_Bw@AA{EcCQMCGE_@AMMWJcARmAp@wCjBeGpAeE^kB^cC^iB^cAb@y@`AcBh@uA^oAXyAPuARmBLcAHa@J_@HC`@wAL@HEHQBUCQGMEm@ESNmB`A_HX{AlBuGfB_GN_ADi@FMDm@?}@Jc@B[EMGIBg@?aACeG?iQ?cBJ_BJMDYCQCIGEMsA?cNQiBAiDAmICmADOD_BFGBIBSAOEMCCE[@iC?cAES?SAeC@iGAoL?mH?i@DU~AaGVy@RSlAgC`A{Bv@uBVgAL_AJm@Bk@bA}BL_@BWBwA@eC?gK?}AAmDAuLHc@?wC?}B@yCKi@?}A?cA@mHAqT?cW?mKHe@ByBNqBLy@Nm@Xu@j@iA\\c@Z[~AkAjAy@v@q@d@i@x@oAf@aAn@iBb@qBZoBPaBDoALqEFuE@s@Iu@BgCDqBJuAFg@`@sAP_ArAuGh@iCd@aC?e@T}AHu@LeBBkA@}MBsNFkYBuNHeC?oBB}FC_SAeHCMAye@AuDGmCKiAG_@Om@gA}CASGWW{A?g@BUFQJODOBWCWIQEEMg@I_AKqBEgAESD{AHkDA}@_@yG{@uNo@mJ_AcOe@cH}Bk_@k@aJMeCGyAAiBCyGBaCBaAF}BNkCDs@Dc@P}BPaBH{@?S|@kIf@gEV}AZeBl@gCp@{BzEuO~BuHzAqFh@}BlBmIhEeTnGs['
+      ),
+    },
+  };
+
+  createLinePath() {
+    this.map?.addSource('route', {
+      type: 'geojson',
+      data: this.routeGeoJSON,
+    });
+
+    this.map?.addLayer({
+      id: 'route',
+      type: 'line',
+      source: 'route',
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round',
+      },
+      paint: {
+        'line-color': '#007AFF', // Blue color
+        'line-width': 5,
+      },
     });
   }
 }
